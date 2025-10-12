@@ -1,0 +1,20 @@
+services:
+  sonarqube:
+    image: sonarqube:latest
+    ports:
+      - "9000:9000"
+    environment:
+      - SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true
+
+  scanner:
+    image: sonarsource/sonar-scanner-cli
+    depends_on:
+      - sonarqube
+    volumes:
+      - ./:/usr/src
+    environment:
+      SONAR_HOST_URL: "http://sonarqube:9000"
+      SONAR_LOGIN: "squ_fb18338abc71e6d56406f2f2076096898df63fc3"
+    command: >
+      -Dsonar.projectKey=bankapp
+      -Dsonar.sources=/usr/src/src

@@ -31,6 +31,7 @@ public class AccountService implements UserDetailsService {
     @Autowired
     private TransactionRepository transactionRepository;
 
+
     public Account findAccountByUsername(String username) {
         return accountRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("Account not found"));
     }

@@ -15,14 +15,18 @@ import java.math.BigDecimal;
 @Controller
 public class BankController {
 
-    @Autowired
-    private AccountService accountService;
+    private static final String ACCOUNT_ATTR = "account";
+    private final AccountService accountService;
+
+    public BankController(AccountService accountService) {
+        this.accountService = accountService;
+    }
 
     @GetMapping("/dashboard")
     public String dashboard(Model model) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         Account account = accountService.findAccountByUsername(username);
-        model.addAttribute("account", account);
+        model.addAttribute(ACCOUNT_ATTR, account);
         return "dashboard";
     }
 
@@ -64,7 +68,7 @@ public class BankController {
             accountService.withdraw(account, amount);
         } catch (RuntimeException e) {
             model.addAttribute("error", e.getMessage());
-            model.addAttribute("account", account);
+            model.addAttribute(ACCOUNT_ATTR, account);
             return "dashboard";
         }
 
@@ -88,7 +92,7 @@ public class BankController {
             accountService.transferAmount(fromAccount, toUsername, amount);
         } catch (RuntimeException e) {
             model.addAttribute("error", e.getMessage());
-            model.addAttribute("account", fromAccount);
+            model.addAttribute(ACCOUNT_ATTR, fromAccount);
             return "dashboard";
         }
 
