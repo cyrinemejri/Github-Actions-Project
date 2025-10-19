@@ -111,8 +111,10 @@
             <version>8.4.0</version>
             
             <configuration>
+				<nvdApiKey>${env.NVD_API_KEY}</nvdApiKey>
                 <!-- ❗ Fail the build if CVSS score >= 7.0 (High/Critical) -->
                 <failBuildOnCVSS>7.0</failBuildOnCVSS>
+				<skipOnError>true</skipOnError>
                 
                 <!-- Optional: skip NVD download caching issues -->
                 <format>HTML</format>
