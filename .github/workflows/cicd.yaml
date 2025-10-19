@@ -53,6 +53,7 @@ jobs:
       with: 
         fetch-depth: 0
     
+    
   sca_depcheck:
     name: SCA - Dependency Check
     runs-on: ubuntu-latest

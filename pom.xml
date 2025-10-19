@@ -105,8 +105,21 @@
                 </execution>
             </executions>
         </plugin>
+		<plugin>
+            <groupId>org.owasp</groupId>
+            <artifactId>dependency-check-maven</artifactId>
+            <version>8.4.0</version>
+            
+            <configuration>
+                <!-- ❗ Fail the build if CVSS score >= 7.0 (High/Critical) -->
+                <failBuildOnCVSS>7.0</failBuildOnCVSS>
+                
+                <!-- Optional: skip NVD download caching issues -->
+                <format>HTML</format>
+                <outputDirectory>target</outputDirectory>
+            </configuration>
+        </plugin>
 		</plugins>
-
 	
 	</build>
 
