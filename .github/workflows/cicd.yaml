@@ -33,6 +33,7 @@ jobs:
 
   build_project_and_sonar_scan:
     runs-on: ubuntu-latest
+    needs: Test
     steps:
     - uses: action/checkout@v4
     - name: Set up JDK 17
