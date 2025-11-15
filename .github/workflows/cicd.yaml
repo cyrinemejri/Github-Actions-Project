@@ -88,30 +88,31 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
   
-      - name: Download OWASP Dependency-Check CLI
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+  
+      - name: Download latest OWASP Dependency‑Check CLI
         run: |
-          curl -L https://github.com/jeremylong/DependencyCheck/releases/download/v8.6.2/dependency-check-8.6.2-release.zip -o dependency-check.zip
+          VERSION=$(curl -s https://dependency-check.github.io/DependencyCheck/current.txt)
+          echo "Using version $VERSION"
+          curl -Ls "https://github.com/dependency-check/DependencyCheck/releases/download/v$VERSION/dependency-check-$VERSION-release.zip" -o dependency-check.zip
           unzip dependency-check.zip -d dependency-check
   
-      - name: Run Dependency-Check
+      - name: Run Dependency‑Check
         run: |
-          ./dependency-check/dependency-check.sh --project bankapp \
+          ./dependency-check/bin/dependency-check.sh \
+            --project bankapp \
             --scan ./ \
             --format HTML \
             --out target \
             --failOnCVSS 7 \
             --nvdApiKey $NVD_API_KEY
   
-      - name: Upload Dependency-Check Report
+      - name: Upload Dependency‑Check Report
         uses: actions/upload-artifact@v4
         with:
           name: dependency-check-report
           path: target/dependency-check-report.html
-  
-  
-          
-  
-  
-  
-  
-  
