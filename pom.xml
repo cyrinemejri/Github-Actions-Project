@@ -80,12 +80,6 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-	<pluginRepositories>
-    <pluginRepository>
-        <id>owasp</id>
-        <url>https://maven.owasp.org/nexus/content/repositories/releases/</url>
-    </pluginRepository>
-</pluginRepositories>
 
 	<build>
 		<plugins>
@@ -113,19 +107,17 @@
             </executions>
         </plugin>
 		<plugin>
-    <groupId>org.owasp</groupId>
-    <artifactId>dependency-check-maven</artifactId>
-    <version>8.6.2</version>
-    <configuration>
-        <nvdApiKey>${env.NVD_API_KEY}</nvdApiKey>
-        <failBuildOnCVSS>7.0</failBuildOnCVSS>
-        <format>HTML</format>
-        <outputDirectory>target</outputDirectory>
-    </configuration>
-</plugin>
-
-
-		</plugins>
+		    <groupId>org.owasp</groupId>
+		    <artifactId>dependency-check-maven</artifactId>
+		    <version>7.5.2</version>
+		    <configuration>
+		        <nvdApiKey>${env.NVD_API_KEY}</nvdApiKey>
+		        <failBuildOnCVSS>7.0</failBuildOnCVSS>
+		        <format>HTML</format>
+		        <outputDirectory>target</outputDirectory>
+		    </configuration>
+		</plugin>
+</plugins>
 
 	
 	</build>
