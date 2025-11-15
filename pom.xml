@@ -107,21 +107,17 @@
             </executions>
         </plugin>
 		<plugin>
-            <groupId>org.owasp</groupId>
-            <artifactId>dependency-check-maven</artifactId>
-            <version>8.6.2</version>
-            
-            <configuration>
-				<nvdApiKey>${env.NVD_API_KEY}</nvdApiKey>
-                <!-- ❗ Fail the build if CVSS score >= 7.0 (High/Critical) -->
-                <failBuildOnCVSS>7.0</failBuildOnCVSS>
-				<skipOnError>true</skipOnError>
-                
-                <!-- Optional: skip NVD download caching issues -->
-                <format>HTML</format>
-                <outputDirectory>target</outputDirectory>
-            </configuration>
-        </plugin>
+		    <groupId>org.owasp</groupId>
+		    <artifactId>dependency-check-maven</artifactId>
+		    <version>8.5.1</version>
+		    <configuration>
+		        <nvdApiKey>${env.NVD_API_KEY}</nvdApiKey>
+		        <failBuildOnCVSS>7.0</failBuildOnCVSS>
+		        <format>HTML</format>
+		        <outputDirectory>target</outputDirectory>
+		    </configuration>
+		</plugin>
+
 		</plugins>
 	
 	</build>
