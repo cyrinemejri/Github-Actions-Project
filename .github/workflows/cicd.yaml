@@ -63,7 +63,12 @@ jobs:
       - name: Build and analyze
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
+        run: |
+          mvn -B verify sonar:sonar \
+            -Dsonar.projectKey=cyrinemejri_Github-Actions-Project \
+            -Dsonar.organization=cyrinemejri \
+            -Dsonar.host.url=https://sonarcloud.io \
+            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
 
       - name: Upload JAR
         uses: actions/upload-artifact@v4
@@ -105,5 +110,6 @@ jobs:
 
 
         
+
 
 
